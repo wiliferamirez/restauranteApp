@@ -41,5 +41,23 @@ namespace RestBook.Reservas.Controllers
             var created = await _reservaService.CrearReservaAsync(dto);
             return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
         }
+        // PUT: api/reservas/{id}
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, UpdateReservaDto dto)
+        {
+            var updated = await _reservaService.UpdateReservaAsync(id, dto);
+            if (!updated) return NotFound();
+            return NoContent();
+        }
+        // DELETE: api/reservas/{id}
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var deleted = await _reservaService.DeleteReservaAsync(id);
+            if (!deleted) return NotFound();
+            return NoContent();
+        }
+
     }
 }

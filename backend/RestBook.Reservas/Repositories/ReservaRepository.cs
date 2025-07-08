@@ -28,6 +28,16 @@ namespace RestBook.Reservas.Repositories
             await _context.Reservas.AddAsync(reserva);
             return reserva;
         }
+        public async Task UpdateAsync(Reserva reserva)
+        {
+            _context.Reservas.Update(reserva);
+        }
+
+        public async Task DeleteAsync(Reserva reserva)
+        {
+            _context.Reservas.Remove(reserva);
+        }
+
 
         public async Task<bool> ExistsAsync(int id)
         {

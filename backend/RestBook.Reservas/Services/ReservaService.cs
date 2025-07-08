@@ -65,5 +65,31 @@ namespace RestBook.Reservas.Services
                 MesaInfo = $"Mesa #{nueva.MesaId}"
             };
         }
+        public async Task<bool> UpdateReservaAsync(int id, UpdateReservaDto dto)
+        {
+            var reserva = await _reservaRepository.GetByIdAsync(id);
+            if (reserva == null) return false;
+
+            reserva.NombreCliente = dto.NombreCliente;
+            reserva.CorreoCliente = dto.CorreoCliente;
+            reserva.FechaHora = dto.FechaHora;
+            reserva.CantidadPersonas = dto.CantidadPersonas;
+            reserva.MesaId = dto.MesaId;
+
+            await _reservaRepository.UpdateAsync(reserva);
+            await _reservaRepository.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> DeleteReservaAsync(int id)
+        {
+            var reserva = await _reservaRepository.GetByIdAsync(id);
+            if (reserva == null) return false;
+
+            await _reservaRepository.DeleteAsync(reserva);
+            await _reservaRepository.SaveChangesAsync();
+            return true;
+        }
+
     }
 }
