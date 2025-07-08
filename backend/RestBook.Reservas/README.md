@@ -28,7 +28,7 @@ Cada capa está separada para garantizar mantenibilidad, legibilidad y facilidad
 
 ---
 
-## 🔗 Endpoints disponibles
+##  Endpoints disponibles
 
 | Método   | Ruta                   | Descripción                         |
 |----------|------------------------|-------------------------------------|
