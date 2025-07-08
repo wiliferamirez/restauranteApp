@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "Zz+Resg3hO8=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\rggua\\restauranteApp\\backend\\RestBook.Reservas\\RestBook.Reservas.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\rggua\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.6\\microsoft.aspnetcore.openapi.9.0.6.nupkg.sha512",
+    "C:\\Users\\rggua\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
