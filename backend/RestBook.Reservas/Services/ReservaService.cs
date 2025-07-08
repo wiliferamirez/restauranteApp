@@ -7,10 +7,12 @@ namespace RestBook.Reservas.Services
     public class ReservaService : IReservaService
     {
         private readonly IReservaRepository _reservaRepository;
+        private readonly RabbitMqPublisher _rabbitMqPublisher;
 
-        public ReservaService(IReservaRepository reservaRepository)
+        public ReservaService(IReservaRepository reservaRepository, RabbitMqPublisher rabbitMqPublisher)
         {
             _reservaRepository = reservaRepository;
+            _rabbitMqPublisher = rabbitMqPublisher;
         }
 
         public async Task<IEnumerable<ReservaDto>> GetAllReservasAsync()
@@ -56,6 +58,9 @@ namespace RestBook.Reservas.Services
             await _reservaRepository.AddAsync(nueva);
             await _reservaRepository.SaveChangesAsync();
 
+            // Enviar evento a RabbitMQ
+            _rabbitMqPublisher.PublishReservaCreada(nueva);
+
             return new ReservaDto
             {
                 Id = nueva.Id,
@@ -65,6 +70,7 @@ namespace RestBook.Reservas.Services
                 MesaInfo = $"Mesa #{nueva.MesaId}"
             };
         }
+
         public async Task<bool> UpdateReservaAsync(int id, UpdateReservaDto dto)
         {
             var reserva = await _reservaRepository.GetByIdAsync(id);
@@ -90,6 +96,5 @@ namespace RestBook.Reservas.Services
             await _reservaRepository.SaveChangesAsync();
             return true;
         }
-
     }
 }

@@ -18,6 +18,8 @@ builder.Services.AddDbContext<RestBookDbContext>(options =>
 builder.Services.AddScoped<IReservaRepository, ReservaRepository>();
 builder.Services.AddScoped<IReservaService, ReservaService>();
 builder.Services.AddSingleton<PasswordHasherService>(); // Password protection
+builder.Services.AddSingleton<RabbitMqPublisher>();
+
 
 // CORS Policy (allow all for development)
 builder.Services.AddCors(options =>
