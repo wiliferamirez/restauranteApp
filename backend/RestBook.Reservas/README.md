@@ -28,15 +28,20 @@ Cada capa está separada para garantizar mantenibilidad, legibilidad y facilidad
 
 ---
 
-##  Endpoints disponibles
+## 🔗 Endpoints disponibles
 
-| Método | Ruta                  | Descripción                         |
-|--------|-----------------------|-------------------------------------|
-| GET    | `/api/reservas`       | Obtener todas las reservas          |
-| GET    | `/api/reservas/{id}`  | Obtener una reserva por ID          |
-| POST   | `/api/reservas`       | Crear una nueva reserva             |
-
+| Método   | Ruta                   | Descripción                         |
+|----------|------------------------|-------------------------------------|
+| GET      | `/api/reservas`        | Obtener todas las reservas          |
+| GET      | `/api/reservas/{id}`   | Obtener una reserva por ID          |
+| POST     | `/api/reservas`        | Crear una nueva reserva             |
+| PUT      | `/api/reservas/{id}`   | Actualizar una reserva existente    |
+| DELETE   | `/api/reservas/{id}`   | Eliminar una reserva existente      |
 - Se incluye un servicio de hash para proteger contraseñas o datos sensibles: `PasswordHasherService`
+
+Puedes acceder a la interfaz Swagger en:  
+ `http://localhost:5198/swagger`
+
 
 ##  Cómo ejecutar el proyecto
 
@@ -44,3 +49,8 @@ Cada capa está separada para garantizar mantenibilidad, legibilidad y facilidad
    ```bash
    cd backend/RestBook.Reservas
    dotnet run
+2. Configura la cadena de conexión a SQL Server en appsettings.json
+3.Para crear la base desde codigo:
+    dotnet ef migrations add InitialCreate
+    dotnet ef database update
+
