@@ -19,7 +19,6 @@
     <Folder Include="Config\" />
     <Folder Include="DAO\" />
     <Folder Include="DTOs\" />
-    <Folder Include="Entities\" />
     <Folder Include="Messaging\" />
     <Folder Include="Services\" />
     <Folder Include="Repositories\" />
