@@ -30,6 +30,7 @@ C:\Users\rggua\restauranteApp\backend\RestBook.Reservas\bin\Debug\net9.0\Microso
 C:\Users\rggua\restauranteApp\backend\RestBook.Reservas\bin\Debug\net9.0\Microsoft.SqlServer.Server.dll
 C:\Users\rggua\restauranteApp\backend\RestBook.Reservas\bin\Debug\net9.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\rggua\restauranteApp\backend\RestBook.Reservas\bin\Debug\net9.0\Mono.TextTemplating.dll
+C:\Users\rggua\restauranteApp\backend\RestBook.Reservas\bin\Debug\net9.0\RabbitMQ.Client.dll
 C:\Users\rggua\restauranteApp\backend\RestBook.Reservas\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\rggua\restauranteApp\backend\RestBook.Reservas\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\rggua\restauranteApp\backend\RestBook.Reservas\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
