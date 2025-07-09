@@ -26,7 +26,6 @@
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="Config\" />
-    <Folder Include="DAO\" />
     <Folder Include="DTOs\" />
     <Folder Include="Messaging\" />
     <Folder Include="Services\" />
