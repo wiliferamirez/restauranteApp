@@ -48,6 +48,11 @@ namespace auth.Repositories
         {
             return await _db.Users.AnyAsync(u => u.Email == email);
         }
+
+        public async Task<IEnumerable<User>> GetAllAsync()
+        {
+            return await _db.Users.ToListAsync();
+        }
     }
 }
 

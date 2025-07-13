@@ -10,5 +10,6 @@ namespace auth.Repositories
         Task<User> UpdateAsync(User user);
         Task DeleteAsync(Guid id);
         Task<bool> EmailExistsAsync(string email);
+        Task<IEnumerable<User>> GetAllAsync();
     }
 }
