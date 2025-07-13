@@ -44,7 +44,7 @@ namespace auth.Controllers
             {
                 return ValidationProblem(ModelState);
             }
-            
+
             var user = await _auth.LoginAsync(dto);
 
             var claims = new List<Claim>
@@ -64,6 +64,14 @@ namespace auth.Controllers
                     ExpiresUtc = DateTimeOffset.UtcNow.AddHours(1)
                 });
             return Ok(user);
+        }
+
+        [HttpPost("logout")]
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return Ok("Logged out successfully.");
         }
     }
 }
