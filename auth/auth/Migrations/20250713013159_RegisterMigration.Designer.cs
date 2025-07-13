@@ -12,8 +12,8 @@ using auth.DAO;
 namespace auth.Migrations
 {
     [DbContext(typeof(AuthDbContext))]
-    [Migration("20250709045731_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250713013159_RegisterMigration")]
+    partial class RegisterMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,9 +32,7 @@ namespace auth.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -51,8 +49,7 @@ namespace auth.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsStaff")
                         .HasColumnType("bit");
@@ -62,17 +59,14 @@ namespace auth.Migrations
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MobilePhoneNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");

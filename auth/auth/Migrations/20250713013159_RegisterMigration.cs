@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace auth.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class RegisterMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,12 +16,12 @@ namespace auth.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    MobilePhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MobilePhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastLogin = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsStaff = table.Column<bool>(type: "bit", nullable: false),
                     EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
