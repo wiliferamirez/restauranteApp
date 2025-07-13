@@ -36,5 +36,30 @@ namespace auth.Services
 
             await _repo.CreateAsync(user);
         }
+
+        public async Task<LoginResponseDto> LoginAsync(LoginRequestDto dto)
+        {
+            var user = await _repo.GetByEmailAsync(dto.Email.Trim().ToLower());
+            if (user == null)
+            {
+                throw new ArgumentException("Invalid email or password.");
+            }
+
+            var result = _hasher.VerifyHashedPassword(user, user.PasswordHash, dto.Password);
+            if (result == PasswordVerificationResult.Failed)
+            {
+                throw new ArgumentException("Invalid email or password.");
+            }
+
+            user.LastLogin = DateTime.UtcNow;
+            await _repo.UpdateAsync(user);
+            
+            return new LoginResponseDto
+            {
+                Id = user.Id,
+                Email = user.Email,
+                LastLogin = user.LastLogin!.Value
+            };
+        }
     }
 }

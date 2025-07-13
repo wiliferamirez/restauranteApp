@@ -30,5 +30,23 @@ namespace auth.Controllers
                 return Conflict(ex.Message);
             }
         }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequestDto dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return ValidationProblem(ModelState);
+            }
+            try
+            {
+                var response = await _auth.LoginAsync(dto);
+                return Ok(response);
+            }
+            catch (ArgumentException ex) when (ex.Message.Contains("Invalid"))
+            {
+                return Unauthorized(ex.Message);
+            }
+        }
     }
 }
