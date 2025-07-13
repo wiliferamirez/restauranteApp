@@ -1,6 +1,10 @@
 ﻿using auth.Services;
 using Microsoft.AspNetCore.Mvc;
 using auth.DTOs;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
 
 namespace auth.Controllers
 {
@@ -14,6 +18,7 @@ namespace auth.Controllers
             _auth = auth ?? throw new ArgumentNullException(nameof(auth));
         }
         [HttpPost("register")]
+        [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDto dto)
         {
             if (!ModelState.IsValid)
@@ -32,21 +37,33 @@ namespace auth.Controllers
         }
 
         [HttpPost("login")]
+        [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginRequestDto dto)
         {
             if (!ModelState.IsValid)
             {
                 return ValidationProblem(ModelState);
             }
-            try
+            
+            var user = await _auth.LoginAsync(dto);
+
+            var claims = new List<Claim>
             {
-                var response = await _auth.LoginAsync(dto);
-                return Ok(response);
-            }
-            catch (ArgumentException ex) when (ex.Message.Contains("Invalid"))
-            {
-                return Unauthorized(ex.Message);
-            }
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Email, user.Email)
+            };
+
+            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var principal = new ClaimsPrincipal(identity);
+
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme, principal,
+                new AuthenticationProperties
+                {
+                    IsPersistent = true,
+                    ExpiresUtc = DateTimeOffset.UtcNow.AddHours(1)
+                });
+            return Ok(user);
         }
     }
 }

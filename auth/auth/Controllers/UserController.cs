@@ -2,11 +2,13 @@
 using auth.Services;
 using auth.DTOs;
 using System.Runtime.CompilerServices;
+using Microsoft.AspNetCore.Authorization;
 
 namespace auth.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUserService _users;
@@ -19,7 +21,7 @@ namespace auth.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserResponseDto>>> GetAll()
         {
-                       try
+            try
             {
                 var users = await _users.GetAllAsync();
                 return Ok(users);
