@@ -17,14 +17,13 @@ builder.Services.AddDbContext<AuthDbContext>(options =>
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services
     .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/auth/login";
+        options.LoginPath = "/api/v1/auth/login";
         options.Cookie.Name = "AuthCookie";
         options.ExpireTimeSpan = TimeSpan.FromHours(48);
         options.Events = new CookieAuthenticationEvents
@@ -64,11 +63,23 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddHttpClient();
 
-builder.Services.AddControllers();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngular", policy =>
+    {
+        policy.WithOrigins("http://192.168.0.143:4200")
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
+    });
+});
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+
 
 var app = builder.Build();
 
@@ -79,7 +90,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
+app.UseCors("AllowAngular");
 app.UseHttpsRedirection();
+app.UseAuthentication();
 
 app.UseAuthorization();
 
