@@ -5,6 +5,7 @@ using auth.Services;
 using auth.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,9 +27,40 @@ builder.Services
         options.LoginPath = "/auth/login";
         options.Cookie.Name = "AuthCookie";
         options.ExpireTimeSpan = TimeSpan.FromHours(48);
+        options.Events = new CookieAuthenticationEvents
+        {
+            OnRedirectToLogin = ctx =>
+            {
+                ctx.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                ctx.Response.ContentType = "application/json";
+                var payload = JsonSerializer.Serialize(new
+                {
+                    error = "Unauthorized",
+                    message = "You must be logged in to access this resource."
+                });
+                return ctx.Response.WriteAsync(payload);
+            },
+
+            OnRedirectToAccessDenied = ctx =>
+            {
+                ctx.Response.StatusCode = StatusCodes.Status403Forbidden;
+                ctx.Response.ContentType = "application/json";
+                var payload = JsonSerializer.Serialize(new
+                {
+                    error = "Forbidden",
+                    message = "You do not have permission to access this resource."
+                });
+                return ctx.Response.WriteAsync(payload);
+            }
+        };
     });
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("StaffOnly", policy =>
+        policy.RequireClaim("IsStaff", "True"));
+}
+);
 
 
 builder.Services.AddControllers();

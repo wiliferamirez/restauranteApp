@@ -39,7 +39,7 @@ namespace auth.Services
 
         public async Task<LoginResponseDto> LoginAsync(LoginRequestDto dto)
         {
-            var user = await _repo.GetByEmailAsync(dto.Email.Trim().ToLower());
+            var user = await _repo.GetByEmailAsync(dto.Email.Trim().ToLowerInvariant());
             if (user == null)
             {
                 throw new ArgumentException("Invalid email or password.");
@@ -58,7 +58,8 @@ namespace auth.Services
             {
                 Id = user.Id,
                 Email = user.Email,
-                LastLogin = user.LastLogin!.Value
+                LastLogin = user.LastLogin!.Value,
+                IsStaff = user.IsStaff
             };
         }
     }

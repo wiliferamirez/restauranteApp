@@ -1,10 +1,11 @@
-﻿using auth.Services;
-using Microsoft.AspNetCore.Mvc;
-using auth.DTOs;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using System.Security.Claims;
+﻿using auth.DTOs;
+using auth.Entities;
+using auth.Services;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace auth.Controllers
 {
@@ -45,13 +46,16 @@ namespace auth.Controllers
                 return ValidationProblem(ModelState);
             }
 
-            var user = await _auth.LoginAsync(dto);
+            var response = await _auth.LoginAsync(dto);
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Email, user.Email)
+                new Claim(ClaimTypes.NameIdentifier, response.Id.ToString()),
+                new Claim(ClaimTypes.Email, response.Email),
+                new Claim("IsStaff", response.IsStaff.ToString()),
             };
+
+
 
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var principal = new ClaimsPrincipal(identity);
@@ -63,7 +67,7 @@ namespace auth.Controllers
                     IsPersistent = true,
                     ExpiresUtc = DateTimeOffset.UtcNow.AddHours(1)
                 });
-            return Ok(user);
+            return Ok($"User with ID: {response.Id} logged in succesfully.");
         }
 
         [HttpPost("logout")]
