@@ -37,7 +37,7 @@ namespace auth.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "An error occurred while retrieving users.");
+                return StatusCode(500, "An error occurred while retrieving users: " + ex.Message);
             }
         }
 
@@ -58,7 +58,7 @@ namespace auth.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "An error occurred while retrieving the user.");
+                return StatusCode(500, "An error occurred while retrieving the user: " + ex.Message);
             }
         }
 
@@ -88,7 +88,7 @@ namespace auth.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "An error occurred while updating the user.");
+                return StatusCode(500, "An error occurred while updating the user:" + ex.Message);
             }
         }
 
@@ -110,7 +110,7 @@ namespace auth.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "An error occurred while deleting the user.");
+                return StatusCode(500, "An error occurred while deleting the user:" + ex.Message);
             }
         }
     }

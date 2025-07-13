@@ -10,5 +10,8 @@ namespace auth.DTOs
         [Required(ErrorMessage = "Password is required.")]
         public string Password { get; set; } = string.Empty;
 
+        [Required(ErrorMessage = "Captcha token is required.")]
+        public string CaptchaToken { get; set; } = null!;
+
     }
 }

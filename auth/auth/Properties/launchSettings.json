@@ -5,7 +5,8 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "Recaptcha__SecretKey": "6LfrwoErAAAAANYrS-4lX4YCFNBKOUvRJT6DwJ7X"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:5217"
@@ -15,7 +16,8 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "Recaptcha__SecretKey": "6LfrwoErAAAAANYrS-4lX4YCFNBKOUvRJT6DwJ7X"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:7131;http://localhost:5217"
