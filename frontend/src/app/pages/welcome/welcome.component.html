@@ -1,7 +1,59 @@
 <div class="container">
-  <h1>Bienvenido</h1>
+  <h1 class="main-title">Restaurante app</h1>
+  <h2 class="subtitle">Bienvenido</h2>
 
-  <button>Programar una mesa</button>
-  <button>Mesa asignada</button>
-  <button routerLink="/login">Cerrar sesión</button>
+  <div class="actions">
+    <button class="main-btn" (click)="abrirReserva()">Programar una mesa</button>
+    <button class="main-btn" (click)="mostrarAsignada()">Mesa asignada</button>
+  </div>
+
+  <div class="logout-row">
+    <button class="logout-btn" routerLink="/login">Cerrar sesión</button>
+  </div>
+
+  <div *ngIf="showReservaForm" class="reserva-form card">
+    <h3>Reserva tu mesa</h3>
+    <div class="form-group">
+      <label for="mesa">Mesa</label>
+      <input id="mesa" type="text" [(ngModel)]="mesa" placeholder="Número de mesa" />
+    </div>
+    <div class="form-group">
+      <label for="hora">Hora</label>
+      <input id="hora" type="time" [(ngModel)]="hora" />
+    </div>
+    <div class="form-group">
+      <label for="fecha">Fecha</label>
+      <input id="fecha" type="date" [(ngModel)]="fecha" />
+    </div>
+    <div class="form-group">
+      <label for="personas">Número de personas</label>
+      <input id="personas" type="number" min="1" [(ngModel)]="personas" />
+    </div>
+    <button class="main-btn" (click)="reservarMesa()">Reservar</button>
+  </div>
+
+  <div *ngIf="showAsignada" class="asignada-form card">
+    <h3>Detalles de tu reserva</h3>
+    <div class="form-group">
+      <label>Mesa asignada:</label>
+      <span>{{ mesa || 'No asignada' }}</span>
+    </div>
+    <div class="form-group">
+      <label>Hora:</label>
+      <span>{{ hora || 'No asignada' }}</span>
+    </div>
+    <div class="form-group">
+      <label>Fecha:</label>
+      <span>{{ fecha || 'No asignada' }}</span>
+    </div>
+    <div class="form-group">
+      <label>Número de personas:</label>
+      <span>{{ personas || 'No asignado' }}</span>
+    </div>
+    <div class="actions">
+      <button class="pay-btn" (click)="pagarReserva()" [disabled]="pagado">Pagar</button>
+      <button class="delete-btn" (click)="eliminarReserva()">Eliminar reserva</button>
+    </div>
+    <div *ngIf="pagado" class="success-msg">¡Reserva pagada!</div>
+  </div>
 </div>
