@@ -1,0 +1,40 @@
+
+.container {
+  max-width: 400px;
+  margin: 80px auto;
+  padding: 40px 30px 30px 30px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+  background: var(--background);
+}
+
+h1 {
+  margin-bottom: 25px;
+  color: var(--primary);
+}
+
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+input {
+  width: 100%;
+  margin-top: 5px;
+}
+
+button {
+  margin-top: 15px;
+  width: 100%;
+  font-size: 1.05rem;
+}
+
+button:last-child {
+  background-color: transparent;
+  border: none;
+  color: var(--primary);
+  text-decoration: underline;
+  margin-top: 10px;
+  width: 100%;
+}
