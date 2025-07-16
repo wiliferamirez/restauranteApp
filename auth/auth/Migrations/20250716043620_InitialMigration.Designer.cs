@@ -12,8 +12,8 @@ using auth.DAO;
 namespace auth.Migrations
 {
     [DbContext(typeof(AuthDbContext))]
-    [Migration("20250713013159_RegisterMigration")]
-    partial class RegisterMigration
+    [Migration("20250716043620_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

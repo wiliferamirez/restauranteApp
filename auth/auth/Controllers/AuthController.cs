@@ -68,7 +68,7 @@ namespace auth.Controllers
                     IsPersistent = true,
                     ExpiresUtc = DateTimeOffset.UtcNow.AddHours(1)
                 });
-            return Ok($"User with ID: {response.Id} logged in succesfully.");
+            return Ok(response);
         }
 
         [HttpPost("logout")]
@@ -76,7 +76,19 @@ namespace auth.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return Ok("Logged out successfully.");
+
+            Response.Cookies.Delete(".AspNetCore.Cookies");
+            Response.Cookies.Delete("AuthCookie");
+
+            return Ok(new { message = "Logged out successfully" });
         }
+
+        [HttpGet("check-session")]
+        public IActionResult CheckSession()
+        {
+            var isAuthenticated = User?.Identity?.IsAuthenticated ?? false;
+            return Ok(new { isAuthenticated });
+        }
+
     }
 }
