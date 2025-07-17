@@ -8,7 +8,7 @@
   </div>
 
   <div class="logout-row">
-    <button class="logout-btn" routerLink="/login">Cerrar sesión</button>
+    <button class="logout-btn" (click)="logout()">Cerrar sesión</button>
   </div>
 
   <div *ngIf="showReservaForm" class="reserva-form card">
@@ -31,6 +31,9 @@
     </div>
     <button class="main-btn" (click)="reservarMesa()">Reservar</button>
   </div>
+  <div class="actions">
+  <button class="main-btn" routerLink="/admin">Lista de usuarios</button>
+</div>
 
   <div *ngIf="showAsignada" class="asignada-form card">
     <h3>Detalles de tu reserva</h3>

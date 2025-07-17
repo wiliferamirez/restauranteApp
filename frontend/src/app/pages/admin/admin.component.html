@@ -1,42 +1,21 @@
-<div class="admin-bg">
-  <div class="admin-card">
-    <h2>Usuarios Registrados</h2>
-    <table class="styled-table">
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Apellido</th>
-          <th>Email</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let u of usuarios">
-          <td>{{ u.nombres }}</td>
-          <td>{{ u.apellidos }}</td>
-          <td>{{ u.email }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <h2>Mesas Asignadas</h2>
-    <table class="styled-table">
-      <thead>
-        <tr>
-          <th>Mesa</th>
-          <th>Hora</th>
-          <th>Fecha</th>
-          <th>Personas</th>
-          <th>Usuario</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let m of mesas">
-          <td>{{ m.mesa }}</td>
-          <td>{{ m.hora }}</td>
-          <td>{{ m.fecha }}</td>
-          <td>{{ m.personas }}</td>
-          <td>{{ m.usuario }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+<h2>Usuarios Registrados</h2>
+<table class="styled-table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Email</th>
+      <th>Teléfono</th>
+      <th>Staff</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let u of usuarios">
+      <td>{{ u.firstName }}</td>
+      <td>{{ u.lastName }}</td>
+      <td>{{ u.email }}</td>
+      <td>{{ u.mobilePhoneNumber }}</td>
+      <td>{{ u.isStaff ? 'Sí' : 'No' }}</td>
+    </tr>
+  </tbody>
+</table>

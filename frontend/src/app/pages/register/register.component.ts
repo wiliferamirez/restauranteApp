@@ -1,56 +1,73 @@
-
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
 import { AuthService } from '../../core/services/auth.service';
 import { UserService } from '../../core/services/user.service';
+import { RegisterRequest } from '../../core/models/register-request';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [RouterModule, FormsModule],
+  imports: [RouterModule, FormsModule, CommonModule],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
-  nombres = '';
-  apellidos = '';
+  firstName = '';
+  lastName = '';
   email = '';
   password = '';
   confirmPassword = '';
+  mobilePhoneNumber = '';
+  address = '';
+  showModal = false;
 
-  constructor(private authService: AuthService, private userService: UserService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private userService: UserService,
+    private router: Router
+  ) {}
 
   onRegister() {
-    if (!this.nombres || !this.apellidos || !this.email || !this.password || !this.confirmPassword) {
+    if (!this.firstName || !this.lastName || !this.email || !this.password || !this.confirmPassword || !this.mobilePhoneNumber || !this.address) {
       alert('Por favor, completa todos los campos.');
       return;
     }
+
     if (this.password !== this.confirmPassword) {
       alert('Las contraseñas no coinciden.');
       return;
     }
-    const user = {
-      nombres: this.nombres,
-      apellidos: this.apellidos,
+
+    const user: RegisterRequest = {
+      firstName: this.firstName,
+      lastName: this.lastName,
       email: this.email,
-      password: this.password
+      password: this.password,
+      mobilePhoneNumber: this.mobilePhoneNumber,
+      address: this.address
     };
+
     this.authService.register(user).subscribe({
       next: () => {
-        // Guardar usuario en UserService para administración
         this.userService.addUser({
           id: Date.now().toString(),
-          nombres: this.nombres,
-          apellidos: this.apellidos,
+          nombres: this.firstName,
+          apellidos: this.lastName,
           email: this.email
         });
-        alert('¡Usuario registrado con éxito!');
-        this.router.navigate(['/login']);
+
+        this.showModal = true;
+
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 2500); // Redirige en 2.5 segundos
       },
       error: (err) => {
-        alert('Error al registrar usuario: ' + (err.error?.message || err.statusText));
+        console.error(err);
+        alert('Error al registrar: ' + (err.error?.message || err.statusText));
       }
     });
   }
