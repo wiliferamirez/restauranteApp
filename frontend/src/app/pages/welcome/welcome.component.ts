@@ -1,14 +1,15 @@
-
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReservaService } from '../../core/services/reserva.service';
+import { AuthService } from '../../core/services/auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-welcome',
   standalone: true,
-  imports: [RouterModule, FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.scss']
 })
@@ -21,7 +22,11 @@ export class WelcomeComponent {
   fecha = '';
   personas = '';
 
-  constructor(private reservaService: ReservaService) {}
+  constructor(
+    private reservaService: ReservaService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   abrirReserva() {
     this.showReservaForm = true;
@@ -40,7 +45,7 @@ export class WelcomeComponent {
       hora: this.hora,
       fecha: this.fecha,
       personas: this.personas,
-      usuario: 'Usuario actual' // Puedes mejorar esto luego
+      usuario: 'Usuario actual'
     });
     alert('¡Reserva realizada!');
     this.showReservaForm = false;
@@ -69,5 +74,20 @@ export class WelcomeComponent {
     this.pagado = false;
     alert('Reserva eliminada');
   }
+
+logout() {
+  this.authService.logout().subscribe({
+    next: () => {
+    },
+    error: (err: HttpErrorResponse) => {
+      console.error('Error al cerrar sesión:', err);
+      alert('Ocurrió un error al cerrar sesión');
+    },
+    complete: () => {
+      alert('Sesión cerrada exitosamente');
+      this.router.navigate(['/login']);
+    }
+  });
 }
 
+}

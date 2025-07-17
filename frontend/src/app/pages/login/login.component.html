@@ -1,28 +1,41 @@
-
 <div class="container">
   <h1>Restaurante App</h1>
   <h2>Iniciar Sesión</h2>
   <form>
     <div class="form-group">
       <label for="email">Email</label>
-      <input id="email" type="email" placeholder="Enter your email" [(ngModel)]="email" name="email" />
+      <input
+        id="email"
+        type="email"
+        placeholder="Enter your email"
+        [(ngModel)]="email"
+        name="email"
+        required
+      />
     </div>
+
     <div class="form-group">
       <label for="password">Contraseña</label>
-      <input id="password" type="password" placeholder="Enter your password" [(ngModel)]="password" name="password" />
+      <input
+        id="password"
+        type="password"
+        placeholder="Enter your password"
+        [(ngModel)]="password"
+        name="password"
+        required
+      />
     </div>
+
+
+    <re-captcha
+      siteKey="6LfrwoErAAAAADX-u_04nouudQBLM3cIx1Mx5tZT"
+      [size]="'invisible'"
+      (resolved)="onCaptchaResolved($event)">
+    </re-captcha>
+
     <div class="button-group">
-      <button type="button" (click)="onLogin()">Entrar</button>
-      <button type="button" routerLink="/register">Registrarse</button>
+      <button type="button" (click)="login()">Entrar</button>
+      <button type="button" (click)="goToRegister()">Registrarse</button>
     </div>
   </form>
 </div>
-
-
-
-
-
-
-
-
-
