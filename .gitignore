@@ -8,3 +8,5 @@
 /auth/auth/obj
 /auth/auth/.vs/ProjectEvaluation
 /backend/RestBook.Reservas/obj/Release/net9.0
+frontend/Dockerfile
+frontend/nginx.conf

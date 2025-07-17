@@ -9,12 +9,15 @@ import { RegisterRequest } from '../models/register-request';
 
 import { AuthUser } from '../models/auth-user';
 
+import { environment } from '../../../environments/environment.prod';
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private authUrl = 'http://localhost:5217/api/v1/Auth';
-  private userUrl = 'http://localhost:5217/api/v1/User'; // ✅ URL real de usuarios
+  private authUrl = `${environment.apiUrl}/Auth`;
+  private userUrl = `${environment.apiUrl}/User`; 
 
   constructor(private http: HttpClient) {}
 
