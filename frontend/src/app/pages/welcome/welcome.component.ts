@@ -14,6 +14,12 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./welcome.component.scss']
 })
 export class WelcomeComponent {
+  irAReservas() {
+    this.router.navigate(['/admin/bookings']);
+  }
+  irAUsuarios() {
+    this.router.navigate(['/admin/users']);
+  }
   showReservaForm = false;
   showAsignada = false;
   pagado = false;
@@ -21,6 +27,13 @@ export class WelcomeComponent {
   hora = '';
   fecha = '';
   personas = '';
+
+  // Mesas simuladas
+  mesasDisponibles = [
+    { id: '1', capacidad: 4 },
+    { id: '2', capacidad: 2 },
+    { id: '3', capacidad: 6 }
+  ];
 
   constructor(
     private reservaService: ReservaService,

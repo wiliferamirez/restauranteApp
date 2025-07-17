@@ -20,6 +20,35 @@
   margin-bottom: 14px;
   font-size: 1.08rem;
 }
+.reserva-form select {
+  border: 1.5px solid #4f8cff;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 1.08rem;
+  outline: none;
+  transition: border 0.3s, box-shadow 0.3s, background 0.3s;
+  box-shadow: 0 2px 12px rgba(79,140,255,0.10);
+  background: linear-gradient(90deg, #f5f7fa 0%, #e3f0ff 100%);
+  margin-bottom: 12px;
+  appearance: none;
+  cursor: pointer;
+  font-weight: 500;
+  color: #2a4d7a;
+  position: relative;
+}
+.reserva-form select:focus {
+  border: 2px solid #2563eb;
+  box-shadow: 0 4px 18px rgba(79,140,255,0.18);
+  background: #fff;
+}
+.reserva-form select option {
+  padding: 10px 14px;
+  background: #e3f0ff;
+  color: #2563eb;
+  font-size: 1.08rem;
+  font-weight: 500;
+}
+
 .reserva-form label {
   color: #2a4d7a;
   font-weight: 500;

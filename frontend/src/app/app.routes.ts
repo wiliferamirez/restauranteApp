@@ -10,7 +10,14 @@ export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'welcome', component: WelcomeComponent, canActivate: [AuthGuard] },
-  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
+  { path: 'welcome', component: WelcomeComponent},
+  {
+    path: 'admin',
+    children: [
+      { path: 'users', component: AdminComponent },
+      { path: 'bookings', component: AdminComponent },
+      { path: '', redirectTo: 'users', pathMatch: 'full' }
+    ]
+  },
   { path: '**', redirectTo: 'login' }
 ];

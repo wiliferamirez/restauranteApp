@@ -21,6 +21,10 @@ export class AdminComponent implements OnInit {
     private reservaService: ReservaService
   ) {}
 
+  isBookingsRoute(): boolean {
+    return window.location.pathname.endsWith('/admin/bookings');
+  }
+
   ngOnInit(): void {
     this.authService.getAllUsers().subscribe({
       next: (users: AuthUser[]) => {
@@ -39,3 +43,4 @@ export class AdminComponent implements OnInit {
     this.mesas = this.reservaService.getReservas();
   }
 }
+

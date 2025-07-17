@@ -5,17 +5,23 @@
   <div class="actions">
     <button class="main-btn" (click)="abrirReserva()">Programar una mesa</button>
     <button class="main-btn" (click)="mostrarAsignada()">Mesa asignada</button>
-  </div>
-
-  <div class="logout-row">
-    <button class="logout-btn" (click)="logout()">Cerrar sesión</button>
+    <button class="main-btn" (click)="irAUsuarios()">Lista de usuarios</button>
+    <button class="main-btn" (click)="irAReservas()">Lista reservas</button>
+    <ng-container *ngIf="!showReservaForm">
+      <button class="logout-btn" (click)="logout()">Cerrar sesión</button>
+    </ng-container>
   </div>
 
   <div *ngIf="showReservaForm" class="reserva-form card">
     <h3>Reserva tu mesa</h3>
     <div class="form-group">
-      <label for="mesa">Mesa</label>
-      <input id="mesa" type="text" [(ngModel)]="mesa" placeholder="Número de mesa" />
+      <label for="mesa">Mesa disponible</label>
+      <select id="mesa" [(ngModel)]="mesa">
+        <option value="" disabled selected>Selecciona una mesa</option>
+        <option *ngFor="let m of mesasDisponibles" [value]="m.id">
+          Mesa {{ m.id }} - Capacidad: {{ m.capacidad }} personas
+        </option>
+      </select>
     </div>
     <div class="form-group">
       <label for="hora">Hora</label>
@@ -30,10 +36,9 @@
       <input id="personas" type="number" min="1" [(ngModel)]="personas" />
     </div>
     <button class="main-btn" (click)="reservarMesa()">Reservar</button>
+    <button class="logout-btn" (click)="logout()">Cerrar sesión</button>
   </div>
-  <div class="actions">
-  <button class="main-btn" routerLink="/admin">Lista de usuarios</button>
-</div>
+
 
   <div *ngIf="showAsignada" class="asignada-form card">
     <h3>Detalles de tu reserva</h3>
