@@ -32,7 +32,7 @@
     <button class="main-btn" (click)="reservarMesa()">Reservar</button>
   </div>
   <div class="actions">
-  <button class="main-btn" routerLink="/admin">Lista de usuarios</button>
+  <button class="main-btn" [routerLink]="['/admin']">Lista de usuarios</button>
 </div>
 
   <div *ngIf="showAsignada" class="asignada-form card">

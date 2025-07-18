@@ -1,6 +1,14 @@
+export interface ReservaRequest {
+  nombreCliente: string;
+  correoCliente: string;
+  fechaHora: string;        
+  cantidadPersonas: number;
+  mesaId: number;
+}
 export interface Reserva {
-  id: string;
-  mesa: number;
-  fecha: string;
-  usuarioId: string;
+  id: number;
+  nombreCliente: string;
+  fechaHora: string;     
+  cantidadPersonas: number;
+  mesaInfo: string;     
 }

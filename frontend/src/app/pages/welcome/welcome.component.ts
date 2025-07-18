@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { ReservaService } from '../../core/services/reserva.service';
 import { AuthService } from '../../core/services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-welcome',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.scss']
 })

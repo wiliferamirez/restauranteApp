@@ -6,7 +6,11 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RecaptchaModule, FormsModule],
+  imports: [
+    RouterOutlet,      
+    RecaptchaModule, 
+    FormsModule    
+  ],
   templateUrl: './app.component.html'
 })
 export class AppComponent {}
