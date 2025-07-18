@@ -1,19 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../../core/services/auth.service';
 import { ReservaService, Reserva } from '../../core/services/reserva.service';
-import { AuthUser } from '../../core/models/auth-user';
+import { AuthUserResponse } from '../../core/models/user-response';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    HttpClientModule    // ← aquí en imports y listo
+  ],
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-  usuarios: AuthUser[] = [];
+  usuarios: AuthUserResponse[] = [];
   mesas: Reserva[] = [];
 
   constructor(
@@ -22,16 +26,13 @@ export class AdminComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.authService.getAllUsers().subscribe({
-      next: (users: AuthUser[]) => {
-        this.usuarios = users;
-      },
-      error: (err: HttpErrorResponse) => {
+    this.authService.getAllUsers().subscribe(
+      (users: AuthUserResponse[]) => this.usuarios = users,
+      (err: HttpErrorResponse) => {
         console.error('Error al cargar usuarios:', err);
         alert('No se pudieron cargar los usuarios.');
       }
-    });
-
+    );
     this.actualizarReservas();
   }
 

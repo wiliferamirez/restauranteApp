@@ -11,6 +11,8 @@ import { AuthUser } from '../models/auth-user';
 
 import { environment } from '../../../environments/environment.prod';
 
+import { AuthUserResponse } from '../models/user-response';
+
 
 @Injectable({
   providedIn: 'root'
@@ -49,7 +51,7 @@ export class AuthService {
     );
   }
 
-  getAllUsers(): Observable<AuthUser[]> {
-    return this.http.get<AuthUser[]>(this.userUrl, { withCredentials: true });
+  getAllUsers(): Observable<AuthUserResponse[]> {
+    return this.http.get<AuthUserResponse[]>(this.userUrl, { withCredentials: true });
   }
 }
