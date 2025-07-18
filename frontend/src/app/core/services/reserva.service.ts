@@ -1,32 +1,16 @@
 import { Injectable } from '@angular/core';
-
-export interface Reserva {
-  mesa: string;
-  hora: string;
-  fecha: string;
-  personas: string;
-  usuario: string;
-}
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { ReservaResponse } from '../models/reserva-response';
 
 @Injectable({ providedIn: 'root' })
-export class ReservaService {
-  private reservas: Reserva[] = [];
+export class ReservaApiService {
+  private apiUrl = 'http://localhost:5198/api/Reservas';
 
-  addReserva(reserva: Reserva) {
-    this.reservas.push(reserva);
-  }
+  constructor(private http: HttpClient) {}
 
-  eliminarReserva(reserva: Reserva) {
-    this.reservas = this.reservas.filter(r =>
-      r.mesa !== reserva.mesa ||
-      r.hora !== reserva.hora ||
-      r.fecha !== reserva.fecha ||
-      r.personas !== reserva.personas ||
-      r.usuario !== reserva.usuario
-    );
-  }
-
-  getReservas(): Reserva[] {
-    return this.reservas;
+  /** Obtiene todas las reservas desde el backend */
+  getAllReservas(): Observable<ReservaResponse[]> {
+    return this.http.get<ReservaResponse[]>(this.apiUrl);
   }
 }

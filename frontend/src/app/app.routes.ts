@@ -5,6 +5,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { AuthGuard } from './core/services/auth.guard';
+import { ReservasComponent } from './pages/reservas/reservas.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -14,5 +15,7 @@ export const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent},
   // { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
   { path: 'admin', component: AdminComponent},
+  { path: 'admin/reservas', component: ReservasComponent },
+
   { path: '**', redirectTo: 'login' }
 ];

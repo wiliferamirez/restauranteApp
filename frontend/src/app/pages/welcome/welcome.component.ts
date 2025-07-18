@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ReservaService } from '../../core/services/reserva.service';
+import { ReservaResponse } from '../../core/models/reserva-response';
+import { ReservaApiService } from '../../core/services/reserva.service';
 import { AuthService } from '../../core/services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -24,7 +25,6 @@ export class WelcomeComponent {
   personas = '';
 
   constructor(
-    private reservaService: ReservaService,
     private authService: AuthService,
     private router: Router
   ) {}
@@ -40,41 +40,13 @@ export class WelcomeComponent {
     this.showReservaForm = false;
   }
 
-  reservarMesa() {
-    this.reservaService.addReserva({
-      mesa: this.mesa,
-      hora: this.hora,
-      fecha: this.fecha,
-      personas: this.personas,
-      usuario: 'Usuario actual'
-    });
-    alert('¡Reserva realizada!');
-    this.showReservaForm = false;
-    this.showAsignada = true;
-    this.pagado = false;
-  }
+
 
   pagarReserva() {
     this.pagado = true;
     alert('¡Reserva pagada exitosamente!');
   }
 
-  eliminarReserva() {
-    this.reservaService.eliminarReserva({
-      mesa: this.mesa,
-      hora: this.hora,
-      fecha: this.fecha,
-      personas: this.personas,
-      usuario: 'Usuario actual'
-    });
-    this.mesa = '';
-    this.hora = '';
-    this.fecha = '';
-    this.personas = '';
-    this.showAsignada = false;
-    this.pagado = false;
-    alert('Reserva eliminada');
-  }
 
 logout() {
   this.authService.logout().subscribe({

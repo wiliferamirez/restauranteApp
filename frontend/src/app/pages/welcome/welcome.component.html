@@ -6,6 +6,9 @@
     <button class="main-btn" (click)="abrirReserva()">Programar una mesa</button>
     <button class="main-btn" (click)="mostrarAsignada()">Mesa asignada</button>
   </div>
+    <button class="main-btn" [routerLink]="['/admin/reservas']">
+    Ver todas las reservas
+  </button>
 
   <div class="logout-row">
     <button class="logout-btn" (click)="logout()">Cerrar sesión</button>
@@ -29,7 +32,7 @@
       <label for="personas">Número de personas</label>
       <input id="personas" type="number" min="1" [(ngModel)]="personas" />
     </div>
-    <button class="main-btn" (click)="reservarMesa()">Reservar</button>
+    <button class="main-btn" >Reservar</button>
   </div>
   <div class="actions">
   <button class="main-btn" [routerLink]="['/admin']">Lista de usuarios</button>
@@ -55,7 +58,7 @@
     </div>
     <div class="actions">
       <button class="pay-btn" (click)="pagarReserva()" [disabled]="pagado">Pagar</button>
-      <button class="delete-btn" (click)="eliminarReserva()">Eliminar reserva</button>
+      <button class="delete-btn" >Eliminar reserva</button>
     </div>
     <div *ngIf="pagado" class="success-msg">¡Reserva pagada!</div>
   </div>

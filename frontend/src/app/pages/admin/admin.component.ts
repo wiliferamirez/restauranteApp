@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../../core/services/auth.service';
-import { ReservaService, Reserva } from '../../core/services/reserva.service';
 import { AuthUserResponse } from '../../core/models/user-response';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -18,11 +17,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class AdminComponent implements OnInit {
   usuarios: AuthUserResponse[] = [];
-  mesas: Reserva[] = [];
 
   constructor(
     private authService: AuthService,
-    private reservaService: ReservaService
   ) {}
 
   ngOnInit(): void {
@@ -33,10 +30,6 @@ export class AdminComponent implements OnInit {
         alert('No se pudieron cargar los usuarios.');
       }
     );
-    this.actualizarReservas();
   }
 
-  actualizarReservas() {
-    this.mesas = this.reservaService.getReservas();
-  }
 }
