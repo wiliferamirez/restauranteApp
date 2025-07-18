@@ -10,10 +10,6 @@
     Ver todas las reservas
   </button>
 
-  <div class="logout-row">
-    <button class="logout-btn" (click)="logout()">Cerrar sesión</button>
-  </div>
-
   <div *ngIf="showReservaForm" class="reserva-form card">
     <h3>Reserva tu mesa</h3>
     <div class="form-group">
@@ -37,6 +33,10 @@
   <div class="actions">
   <button class="main-btn" [routerLink]="['/admin']">Lista de usuarios</button>
 </div>
+
+  <div class="logout-row">
+    <button class="logout-btn" (click)="logout()">Cerrar sesión</button>
+  </div>
 
   <div *ngIf="showAsignada" class="asignada-form card">
     <h3>Detalles de tu reserva</h3>
