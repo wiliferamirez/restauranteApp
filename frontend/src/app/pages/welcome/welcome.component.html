@@ -32,7 +32,7 @@
       <label for="personas">Número de personas</label>
       <input id="personas" type="number" min="1" [(ngModel)]="personas" />
     </div>
-    <button class="main-btn" >Reservar</button>
+    <button class="main-btn" (click)="reservarMesa()">Reservar</button>
   </div>
   <div class="actions">
   <button class="main-btn" [routerLink]="['/admin']">Lista de usuarios</button>
